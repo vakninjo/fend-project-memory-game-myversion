@@ -1,15 +1,99 @@
+const deck = document.querySelector('.deck');
+const cards = ["fa fa-diamond","fa fa-diamond",
+                "fa fa-paper-plane-o", "fa fa-paper-plane-o",
+                "fa fa-anchor", "fa fa-anchor",
+                "fa fa-bolt", "fa fa-bolt",
+                "fa fa-bomb", "fa fa-bomb",
+                "fa fa-cube", "fa fa-cube",
+                "fa fa-leaf","fa fa-leaf",
+                "fa fa-bicycle", "fa fa-bicycle"]
+
+const resetGame = document.querySelector('.restart');
 /*
- * Create a list that holds all of your cards
- */
+* start game and build deck
+* Display the cards on the page
+*   - shuffle the list of cards using the provided "shuffle" method below
+*   - loop through each card and create its HTML
+*   - add each card's HTML to the page
+*/
+initGame();
+
+function initGame() {
+  let cardSet = cards;
+  let cardHTML = shuffle(cardSet).map(function(card){
+    return createCard(card);
+  });
+  deck.innerHTML = cardHTML.join('');
+
+}
+
+function createCard(card){
+  return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
+}
+
+//start game logic
+const allCards = document.querySelectorAll('.card');
+let openCards = [];
+const moveCounter = document.querySelector('.moves');
+let moves= 0;
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+allCards.forEach(function(card){
+  card.addEventListener('click', function(e){
+    //open cards while preventing opening more than two cards
+    if (openCards.length <= 1){
+      openCard(card);
+      // check if cards matched
+      checkOpenCards(card);
+    }
+  });
+});
 
+
+
+function openCard(e){
+  if (!e.classList.contains('open') && !e.classList.contains('show') && !e.classList.contains('match')){
+      openCards.push(e)
+      e.classList.add('open', 'show');
+    }
+}
+
+function checkOpenCards(e){
+  if (openCards.length == 2) {
+    console.log(openCards[0].dataset.card);
+    console.log(openCards[1].dataset.card);
+
+    if (openCards[0].dataset.card == openCards[1].dataset.card){
+      openCards.forEach(function(card){
+        card.classList.add('match');
+      });
+      clearOpenCards ()
+    } else {
+      setTimeout(function(){
+        openCards.forEach(function(card){
+          card.classList.remove('open', 'show');
+        });
+        clearOpenCards ()
+      }, 1050);
+    }
+    moves ++
+  }
+  moveCounter.innerText = moves;
+}
+
+function clearOpenCards (){
+  openCards = [];
+}
+
+
+
+
+// function gameOver(){
+//
+// }
+
+
+//supporting functions
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -24,7 +108,6 @@ function shuffle(array) {
 
     return array;
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
