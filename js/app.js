@@ -8,7 +8,7 @@ const cards = ["fa fa-diamond","fa fa-diamond",
                 "fa fa-leaf","fa fa-leaf",
                 "fa fa-bicycle", "fa fa-bicycle"]
 
-const resetGame = document.querySelector('.restart');
+const resetGame = document.querySelector('#restart');
 const moveCounter = document.querySelector('.moves');
 let moves= 0;
 let openCards = [];
