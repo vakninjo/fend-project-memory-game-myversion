@@ -52,7 +52,9 @@ function initGame(){
       if (openCards.length <= 1){
         openCard(card);
         // check if cards matched
-        checkOpenCards(card);
+        if (openCards.length == 2){
+          checkOpenCards(card);
+        }
       }
     });
   });
@@ -71,13 +73,18 @@ function checkOpenCards(e){
   if (openCards.length == 2) {
     if (openCards[0].dataset.card == openCards[1].dataset.card){
       openCards.forEach(function(card){
+        card.classList.add('animated', 'tada');
         card.classList.add('match');
       });
       clearOpenCards ()
     } else {
+      openCards.forEach(function(card){
+        card.classList.add('animated', 'shake');
+      });
       setTimeout(function(){
         openCards.forEach(function(card){
           card.classList.remove('open', 'show');
+          card.classList.remove('animated', 'shake');
         });
         clearOpenCards ()
       }, 750);
@@ -142,6 +149,10 @@ function shuffle(array) {
 
     return array;
 }
+
+
+
+
 
 //main
 initCards();
