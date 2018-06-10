@@ -80,7 +80,7 @@ function checkOpenCards(e){
           card.classList.remove('open', 'show');
         });
         clearOpenCards ()
-      }, 1050);
+      }, 750);
     }
     gameMoves();
     console.log("Moves counter in checkOpenCards:", moves);
