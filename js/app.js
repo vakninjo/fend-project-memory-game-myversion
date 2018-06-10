@@ -147,6 +147,14 @@ function shuffle(array) {
 initCards();
 initGame();
 
+//
+// TODO :
+// wrong card animation
+// correct card animation
+// complete game
+// popup winner message and option to reset game
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
