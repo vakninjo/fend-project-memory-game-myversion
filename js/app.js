@@ -9,6 +9,10 @@ const cards = ["fa fa-diamond","fa fa-diamond",
                 "fa fa-bicycle", "fa fa-bicycle"]
 
 const resetGame = document.querySelector('.restart');
+const moveCounter = document.querySelector('.moves');
+let moves= 0;
+let openCards = [];
+
 /*
 * start game and build deck
 * Display the cards on the page
@@ -16,38 +20,33 @@ const resetGame = document.querySelector('.restart');
 *   - loop through each card and create its HTML
 *   - add each card's HTML to the page
 */
-initGame();
-
 function initGame() {
   let cardSet = cards;
   let cardHTML = shuffle(cardSet).map(function(card){
     return createCard(card);
   });
   deck.innerHTML = cardHTML.join('');
-
 }
 
 function createCard(card){
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
 
-//start game logic
-const allCards = document.querySelectorAll('.card');
-let openCards = [];
-const moveCounter = document.querySelector('.moves');
-let moves= 0;
+//game logic
 
-
-allCards.forEach(function(card){
-  card.addEventListener('click', function(e){
-    //open cards while preventing opening more than two cards
-    if (openCards.length <= 1){
-      openCard(card);
-      // check if cards matched
-      checkOpenCards(card);
-    }
+function initCards (){
+  const allCards = document.querySelectorAll('.card');
+  allCards.forEach(function(card){
+    card.addEventListener('click', function(e){
+      //open cards while preventing opening more than two cards
+      if (openCards.length <= 1){
+        openCard(card);
+        // check if cards matched
+        checkOpenCards(card);
+      }
+    });
   });
-});
+}
 
 
 
@@ -60,9 +59,6 @@ function openCard(e){
 
 function checkOpenCards(e){
   if (openCards.length == 2) {
-    console.log(openCards[0].dataset.card);
-    console.log(openCards[1].dataset.card);
-
     if (openCards[0].dataset.card == openCards[1].dataset.card){
       openCards.forEach(function(card){
         card.classList.add('match');
@@ -76,7 +72,8 @@ function checkOpenCards(e){
         clearOpenCards ()
       }, 1050);
     }
-    moves ++
+    moves ++;
+    console.log("Moves counter in checkOpenCards:", moves);
   }
   moveCounter.innerText = moves;
 }
@@ -85,7 +82,14 @@ function clearOpenCards (){
   openCards = [];
 }
 
-
+resetGame.addEventListener('click', function(e){
+  clearOpenCards ();
+  moves= 0;
+  console.log("Moves counter when restart is clicked:", moves);
+  moveCounter.innerText = moves;
+  initGame();
+  initCards();
+});
 
 
 // function gameOver(){
@@ -108,6 +112,10 @@ function shuffle(array) {
 
     return array;
 }
+
+//main
+initGame();
+initCards();
 
 /*
  * set up the event listener for a card. If a card is clicked:
