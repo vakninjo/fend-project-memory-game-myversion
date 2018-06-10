@@ -102,8 +102,9 @@ h1 {
     list-style: none;
     display: inline-block;
 }
-
-.score-panel .restart {
-    float: right;
+.score-panerl #restart{
     cursor: pointer;
+}
+.score-panel .right-corner {
+    float: right;
 }
