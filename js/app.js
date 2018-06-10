@@ -10,8 +10,12 @@ const cards = ["fa fa-diamond","fa fa-diamond",
 
 const resetGame = document.querySelector('#restart');
 const moveCounter = document.querySelector('.moves');
+const timerDisplay = document.querySelector('#timer');
 let moves= 0;
 let openCards = [];
+let timeCount = 0;
+let gameStarted = false;
+let timerLoop;
 
 /*
 * start game and build deck
@@ -38,6 +42,12 @@ function initCards (){
   const allCards = document.querySelectorAll('.card');
   allCards.forEach(function(card){
     card.addEventListener('click', function(e){
+      //start timer
+      if (!gameStarted){
+        gameStarted = true;
+        timeCount = 0;
+        setTimeout(startTimer, 1000);
+      }
       //open cards while preventing opening more than two cards
       if (openCards.length <= 1){
         openCard(card);
@@ -89,8 +99,23 @@ resetGame.addEventListener('click', function(e){
   moveCounter.innerText = moves;
   initGame();
   initCards();
+  resetTimer();
 });
 
+
+// start the timer
+function startTimer(){
+    timeCount += 1;
+    timerDisplay.innerHTML = timeCount;
+    timerLoop = setTimeout(startTimer, 1000);
+}
+
+function resetTimer(){
+  gameStarted = false;
+  timeCount = 0;
+  timerDisplay.innerHTML = timeCount;
+  clearTimeout(timerLoop);
+}
 
 // function gameOver(){
 //
