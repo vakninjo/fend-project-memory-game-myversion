@@ -24,7 +24,7 @@ let timerLoop;
 *   - loop through each card and create its HTML
 *   - add each card's HTML to the page
 */
-function initGame() {
+function initCards() {
   let cardSet = cards;
   let cardHTML = shuffle(cardSet).map(function(card){
     return createCard(card);
@@ -38,7 +38,7 @@ function createCard(card){
 
 //game logic
 
-function initCards (){
+function initGame(){
   const allCards = document.querySelectorAll('.card');
   allCards.forEach(function(card){
     card.addEventListener('click', function(e){
@@ -97,8 +97,8 @@ resetGame.addEventListener('click', function(e){
   moves= 0;
   console.log("Moves counter when restart is clicked:", moves);
   moveCounter.innerText = moves;
-  initGame();
   initCards();
+  initGame();
   resetTimer();
 });
 
@@ -139,8 +139,8 @@ function shuffle(array) {
 }
 
 //main
-initGame();
 initCards();
+initGame();
 
 /*
  * set up the event listener for a card. If a card is clicked:
