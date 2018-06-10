@@ -82,9 +82,14 @@ function checkOpenCards(e){
         clearOpenCards ()
       }, 1050);
     }
-    moves ++;
+    gameMoves();
     console.log("Moves counter in checkOpenCards:", moves);
   }
+
+}
+
+function gameMoves(){
+  moves ++;
   moveCounter.innerText = moves;
 }
 
