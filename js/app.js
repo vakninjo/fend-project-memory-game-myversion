@@ -11,16 +11,18 @@ const cards = ["fa fa-diamond","fa fa-diamond",
 const resetGame = document.querySelector('#restart');
 const moveCounter = document.querySelector('.moves');
 const timerDisplay = document.querySelector('#timer');
+const starList = document.querySelector('.stars').querySelectorAll('i');
 let moves= 0;
 let openCards = [];
 let timeCount = 0;
 let gameStarted = false;
 let timerLoop;
+let matchedCounter = 0;
 
 /*
 * start game and build deck
 * Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method below
+*   - shuffle the list of cards using the provided "shuffle" method
 *   - loop through each card and create its HTML
 *   - add each card's HTML to the page
 */
@@ -56,6 +58,10 @@ function initGame(){
           checkOpenCards(card);
         }
       }
+
+
+
+      //check game end
     });
   });
 }
@@ -75,6 +81,7 @@ function checkOpenCards(e){
       openCards.forEach(function(card){
         card.classList.add('animated', 'tada');
         card.classList.add('match');
+        matchedCounter ++;
       });
       clearOpenCards ()
     } else {
@@ -89,7 +96,10 @@ function checkOpenCards(e){
         clearOpenCards ()
       }, 750);
     }
+    //update game moves
     gameMoves();
+    //check gamescore
+    removeStar();
     console.log("Moves counter in checkOpenCards:", moves);
   }
 
@@ -129,9 +139,22 @@ function resetTimer(){
   clearTimeout(timerLoop);
 }
 
+function removeStar(){
+  if (moves == 10){
+    starList[0].classList.add('fa-star-o');
+  } else if (moves ==20) {
+    starList[1].classList.add('fa-star-o');
+  }
+}
+
+
 // function gameOver(){
 //
 // }
+
+
+
+
 
 
 //supporting functions
@@ -160,10 +183,15 @@ initGame();
 
 //
 // TODO :
-// wrong card animation
-// correct card animation
+// wrong card animation - V
+// correct card animation - V
+//start track
 // complete game
+//  -add pop-up and reset game
+//  -display score
+//
 // popup winner message and option to reset game
+//review udacity guidelines
 
 
 /*
