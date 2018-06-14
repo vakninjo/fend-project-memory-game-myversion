@@ -69,16 +69,13 @@ function openCard(e){
     }
 }
 
-//For the following function I was not able to get animationend eventlistener integrated in a reasonbale time therefore I used setTimeout to stay on track. Need to refactor this later.
-//maybe use: https://teamtreehouse.com/community/shake-effect-with-javascript-only or https://gomakethings.com/vanilla-javascript-version-of-jquery-extend/
-// animvations using anmimate-css https://github.com/daneden/animate.css/#usage
 function checkOpenCards(){
   if (openCards.length == 2) {
     if (openCards[0].dataset.card == openCards[1].dataset.card){
       matchedCards(openCards);
       matchedCounter ++;
       //debug: console.log("matchedCounter is: ", matchedCounter);
-      clearOpenCards ()
+      clearOpenCards ();
     } else {
       noMatch(openCards);
     }
@@ -92,8 +89,9 @@ function checkOpenCards(){
   }
 }
 
-
-function matchedCards(openCards) {
+//For the following two functions I was not able to get animationend eventlistener integrated in a reasonbale time therefore I used setTimeout to stay on track. Need to refactor this later.
+//maybe use: https://teamtreehouse.com/community/shake-effect-with-javascript-only or https://gomakethings.com/vanilla-javascript-version-of-jquery-extend/
+// animvations using anmimate-css https://github.com/daneden/animate.css/#usagefunction matchedCards(openCards) {
   openCards.forEach(function(card){
     card.classList.add('animated', 'tada');
     card.classList.add('match');
@@ -117,7 +115,7 @@ function endGame (){
   if (matchedCounter == 8 && openCards.length == 0 ) {
     clearTimeout(timerLoop);
     vex.dialog.confirm({
-      message: `Nice! You won the game in ${timeCount} seconds with ${numOfStars}/3 star rating. Play again?`,
+      message: `Nice! You won the game in ${timeCount} seconds with a total of ${moves} moves. Your rating: ${numOfStars} stars. Play again?`,
       callback: function (value) {
           if (value){
             startNewGame();
@@ -212,14 +210,3 @@ initGame();
 // popup winner message and option to reset game V
 //review udacity guidelines
 //https://gomakethings.com/automatically-detecting-when-transitions-end-with-vanilla-javascript/
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
