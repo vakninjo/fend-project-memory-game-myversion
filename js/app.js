@@ -92,6 +92,7 @@ function checkOpenCards(){
 //For the following two functions I was not able to get animationend eventlistener integrated in a reasonbale time therefore I used setTimeout to stay on track. Need to refactor this later.
 //maybe use: https://teamtreehouse.com/community/shake-effect-with-javascript-only or https://gomakethings.com/vanilla-javascript-version-of-jquery-extend/
 // animvations using anmimate-css https://github.com/daneden/animate.css/#usage
+
 function matchedCards(openCards) {
   openCards.forEach(function(card){
     card.classList.add('animated', 'tada');
@@ -207,7 +208,7 @@ initGame();
 // complete game V
 //  -add pop-up and reset game V
 //  -display score V
-// make responsive
+// make responsive V
 // fix readme file
 // add leaderboard?
 // add event listener for key game restart

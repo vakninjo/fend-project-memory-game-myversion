@@ -108,3 +108,24 @@ h1 {
 .score-panel .right-corner {
     float: right;
 }
+
+@media screen and (max-width: 750px)  {
+  .container {
+    width: 100%;
+  }
+  .score-panel {
+        width: 95%;
+    }
+
+    .deck {
+        width: 100%;
+        padding: 16px;
+        min-height: 100vw;
+    }
+
+    .deck .card {
+        width: 20vw;
+        height: 20vw;
+    }
+}
+}
