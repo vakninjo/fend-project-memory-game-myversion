@@ -18,6 +18,7 @@ let timeCount = 0;
 let gameStarted = false;
 let timerLoop;
 let matchedCounter = 0;
+let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
 /*
 * start game and build deck
@@ -39,7 +40,6 @@ function createCard(card){
 }
 
 //game logic
-
 function initGame(){
   const allCards = document.querySelectorAll('.card');
   allCards.forEach(function(card){
@@ -55,18 +55,14 @@ function initGame(){
         openCard(card);
         // check if cards matched
         if (openCards.length == 2){
-          checkOpenCards(card);
+          checkOpenCards();
         }
       }
 
 
-
-      //check game end
     });
   });
 }
-
-
 
 function openCard(e){
   if (!e.classList.contains('open') && !e.classList.contains('show') && !e.classList.contains('match')){
@@ -75,14 +71,18 @@ function openCard(e){
     }
 }
 
-function checkOpenCards(e){
+//For the following function I was not able to get animationend eventlistener integrated in a reasonbale time therefore I used setTimeout to stay on track. Need to refactor this later.
+//maybe use: https://teamtreehouse.com/community/shake-effect-with-javascript-only or https://gomakethings.com/vanilla-javascript-version-of-jquery-extend/
+// animvations using anmimate-css https://github.com/daneden/animate.css/#usage
+function checkOpenCards(){
   if (openCards.length == 2) {
     if (openCards[0].dataset.card == openCards[1].dataset.card){
       openCards.forEach(function(card){
         card.classList.add('animated', 'tada');
         card.classList.add('match');
-        matchedCounter ++;
       });
+      matchedCounter ++;
+      //debug: console.log("matchedCounter is: ", matchedCounter);
       clearOpenCards ()
     } else {
       openCards.forEach(function(card){
@@ -95,14 +95,26 @@ function checkOpenCards(e){
         });
         clearOpenCards ()
       }, 750);
+
     }
     //update game moves
     gameMoves();
     //check gamescore
     removeStar();
-    console.log("Moves counter in checkOpenCards:", moves);
+    //check game end
+    endGame();
+    // debug: console.log("Moves counter in checkOpenCards:", moves);
   }
+}
 
+function endGame (){
+  if (matchedCounter == 1 && openCards.length == 0 ) {
+    clearTimeout(timerLoop);
+    setTimeout(function(){
+      alert (`you won! and your time was ${timeCount}`);
+
+    }, 1000);
+  }
 }
 
 function gameMoves(){
@@ -124,7 +136,6 @@ resetGame.addEventListener('click', function(e){
   resetTimer();
 });
 
-
 // start the timer
 function startTimer(){
     timeCount += 1;
@@ -140,22 +151,16 @@ function resetTimer(){
 }
 
 function removeStar(){
-  if (moves == 10){
+  if (moves == 12){
     starList[0].classList.add('fa-star-o');
   } else if (moves ==20) {
     starList[1].classList.add('fa-star-o');
   }
 }
 
-
 // function gameOver(){
 //
 // }
-
-
-
-
-
 
 //supporting functions
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -176,7 +181,6 @@ function shuffle(array) {
 
 
 
-
 //main
 initCards();
 initGame();
@@ -185,14 +189,14 @@ initGame();
 // TODO :
 // wrong card animation - V
 // correct card animation - V
-//start track
+//start track V
 // complete game
 //  -add pop-up and reset game
 //  -display score
 //
 // popup winner message and option to reset game
 //review udacity guidelines
-
+//https://gomakethings.com/automatically-detecting-when-transitions-end-with-vanilla-javascript/
 
 /*
  * set up the event listener for a card. If a card is clicked:
