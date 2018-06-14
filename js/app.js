@@ -20,13 +20,7 @@ let timerLoop;
 let matchedCounter = 0;
 let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
-/*
-* start game and build deck
-* Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method
-*   - loop through each card and create its HTML
-*   - add each card's HTML to the page
-*/
+//build board
 function initCards() {
   let cardSet = cards;
   let cardHTML = shuffle(cardSet).map(function(card){
@@ -58,8 +52,6 @@ function initGame(){
           checkOpenCards();
         }
       }
-
-
     });
   });
 }
@@ -95,7 +87,6 @@ function checkOpenCards(){
         });
         clearOpenCards ()
       }, 750);
-
     }
     //update game moves
     gameMoves();
@@ -112,7 +103,6 @@ function endGame (){
     clearTimeout(timerLoop);
     setTimeout(function(){
       alert (`you won! and your time was ${timeCount}`);
-
     }, 1000);
   }
 }
@@ -136,7 +126,7 @@ resetGame.addEventListener('click', function(e){
   resetTimer();
 });
 
-// start the timer
+// timer feature
 function startTimer(){
     timeCount += 1;
     timerDisplay.innerHTML = timeCount;
@@ -150,6 +140,7 @@ function resetTimer(){
   clearTimeout(timerLoop);
 }
 
+//tracking game stars
 function removeStar(){
   if (moves == 12){
     starList[0].classList.add('fa-star-o');
@@ -157,10 +148,6 @@ function removeStar(){
     starList[1].classList.add('fa-star-o');
   }
 }
-
-// function gameOver(){
-//
-// }
 
 //supporting functions
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -178,9 +165,6 @@ function shuffle(array) {
     return array;
 }
 
-
-
-
 //main
 initCards();
 initGame();
@@ -190,7 +174,7 @@ initGame();
 // wrong card animation - V
 // correct card animation - V
 //start track V
-// complete game
+// complete game V
 //  -add pop-up and reset game
 //  -display score
 //
