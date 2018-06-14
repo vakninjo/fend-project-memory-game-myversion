@@ -18,7 +18,13 @@ let timeCount = 0;
 let gameStarted = false;
 let timerLoop;
 let matchedCounter = 0;
+let numOfStars = 3;
 let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+//modal library
+//http://github.hubspot.com/vex/api/themes/
+vex.defaultOptions.className= 'vex-theme-flat-attack';
+vex.dialog.buttons.YES.text = 'Yes!';
+vex.dialog.buttons.NO.text = 'No';
 
 //build board
 function initCards() {
@@ -98,13 +104,38 @@ function checkOpenCards(){
   }
 }
 
+
+function matchedCards (card) {
+
+}
+
 function endGame (){
-  if (matchedCounter == 1 && openCards.length == 0 ) {
+  if (matchedCounter == 8 && openCards.length == 0 ) {
     clearTimeout(timerLoop);
-    setTimeout(function(){
-      alert (`you won! and your time was ${timeCount}`);
-    }, 1000);
+    vex.dialog.confirm({
+      message: `Nice! You won the game in ${timeCount} seconds with ${numOfStars}/3 star rating. Play again?`,
+      callback: function (value) {
+          if (value){
+            startNewGame();
+          }
+        }
+    });
   }
+}
+
+function startNewGame(){
+  clearOpenCards ();
+  resetTimer();
+  moves= 0;
+  matchedCounter = 0;
+  //debug console.log("Moves counter when restart is clicked:", moves);
+  moveCounter.innerText = moves;
+  starList.forEach(function (star){
+    star.classList.remove('fa-star-o');
+  });
+  numOfStars = 0;
+  initCards();
+  initGame();
 }
 
 function gameMoves(){
@@ -117,13 +148,7 @@ function clearOpenCards (){
 }
 
 resetGame.addEventListener('click', function(e){
-  clearOpenCards ();
-  moves= 0;
-  console.log("Moves counter when restart is clicked:", moves);
-  moveCounter.innerText = moves;
-  initCards();
-  initGame();
-  resetTimer();
+  startNewGame()
 });
 
 // timer feature
@@ -144,8 +169,10 @@ function resetTimer(){
 function removeStar(){
   if (moves == 12){
     starList[0].classList.add('fa-star-o');
+    numOfStars --;
   } else if (moves ==20) {
     starList[1].classList.add('fa-star-o');
+    numOfStars --;
   }
 }
 
@@ -175,10 +202,10 @@ initGame();
 // correct card animation - V
 //start track V
 // complete game V
-//  -add pop-up and reset game
-//  -display score
+//  -add pop-up and reset game V
+//  -display score V
 //
-// popup winner message and option to reset game
+// popup winner message and option to reset game V
 //review udacity guidelines
 //https://gomakethings.com/automatically-detecting-when-transitions-end-with-vanilla-javascript/
 
