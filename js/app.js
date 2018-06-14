@@ -75,23 +75,12 @@ function openCard(e){
 function checkOpenCards(){
   if (openCards.length == 2) {
     if (openCards[0].dataset.card == openCards[1].dataset.card){
-      openCards.forEach(function(card){
-        matchedCards(card);
-      });
+      matchedCards(openCards);
       matchedCounter ++;
       //debug: console.log("matchedCounter is: ", matchedCounter);
       clearOpenCards ()
     } else {
-      openCards.forEach(function(card){
-        card.classList.add('animated', 'shake');
-      });
-      setTimeout(function(){
-        openCards.forEach(function(card){
-          card.classList.remove('open', 'show');
-          card.classList.remove('animated', 'shake');
-        });
-        clearOpenCards ()
-      }, 750);
+      noMatch(openCards);
     }
     //update game moves
     gameMoves();
@@ -104,9 +93,24 @@ function checkOpenCards(){
 }
 
 
-function matchedCards(card) {
-  card.classList.add('animated', 'tada');
-  card.classList.add('match');
+function matchedCards(openCards) {
+  openCards.forEach(function(card){
+    card.classList.add('animated', 'tada');
+    card.classList.add('match');
+
+  });
+}
+function noMatch(openCards){
+  openCards.forEach(function(card){
+    card.classList.add('animated', 'shake');
+  });
+  setTimeout(function(){
+    openCards.forEach(function(card){
+      card.classList.remove('open', 'show');
+      card.classList.remove('animated', 'shake');
+    });
+    clearOpenCards ()
+  }, 750);
 }
 
 function endGame (){
@@ -133,7 +137,7 @@ function startNewGame(){
   starList.forEach(function (star){
     star.classList.remove('fa-star-o');
   });
-  numOfStars = 0;
+  numOfStars = 3;
   initCards();
   initGame();
 }
