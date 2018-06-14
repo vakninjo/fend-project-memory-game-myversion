@@ -76,8 +76,7 @@ function checkOpenCards(){
   if (openCards.length == 2) {
     if (openCards[0].dataset.card == openCards[1].dataset.card){
       openCards.forEach(function(card){
-        card.classList.add('animated', 'tada');
-        card.classList.add('match');
+        matchedCards(card);
       });
       matchedCounter ++;
       //debug: console.log("matchedCounter is: ", matchedCounter);
@@ -105,8 +104,9 @@ function checkOpenCards(){
 }
 
 
-function matchedCards (card) {
-
+function matchedCards(card) {
+  card.classList.add('animated', 'tada');
+  card.classList.add('match');
 }
 
 function endGame (){
