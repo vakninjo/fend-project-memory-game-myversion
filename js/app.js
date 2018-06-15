@@ -20,6 +20,7 @@ let timerLoop;
 let matchedCounter = 0;
 let numOfStars = 3;
 let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
 //modal library
 //http://github.hubspot.com/vex/api/themes/
 vex.defaultOptions.className= 'vex-theme-flat-attack';
@@ -74,7 +75,6 @@ function checkOpenCards(){
     if (openCards[0].dataset.card == openCards[1].dataset.card){
       matchedCards(openCards);
       matchedCounter ++;
-      //debug: console.log("matchedCounter is: ", matchedCounter);
       clearOpenCards ();
     } else {
       noMatch(openCards);
@@ -85,7 +85,6 @@ function checkOpenCards(){
     removeStar();
     //check game end
     endGame();
-    // debug: console.log("Moves counter in checkOpenCards:", moves);
   }
 }
 
@@ -132,7 +131,6 @@ function startNewGame(){
   resetTimer();
   moves= 0;
   matchedCounter = 0;
-  //debug console.log("Moves counter when restart is clicked:", moves);
   moveCounter.innerText = moves;
   starList.forEach(function (star){
     star.classList.remove('fa-star-o');
@@ -199,19 +197,3 @@ function shuffle(array) {
 //main
 initCards();
 initGame();
-
-//
-// TODO :
-// wrong card animation - V
-// correct card animation - V
-//start track V
-// complete game V
-//  -add pop-up and reset game V
-//  -display score V
-// make responsive V
-// popup winner message and option to reset game V
-// fix readme file V
-// add leaderboard? will be added in version 2
-// add event listener for key game restart? will be added in version 2
-//review udacity guidelines V
-//https://gomakethings.com/automatically-detecting-when-transitions-end-with-vanilla-javascript/
