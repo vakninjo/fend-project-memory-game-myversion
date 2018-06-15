@@ -2,19 +2,19 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [How to play](#How to play)
+* [Resources used](#Resources used)
 
-## Instructions
+## How to play
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Select a card by clicking on it. Once clicked the card will flip over and you will need to select another card. If it does not match, remember the cards for the next match attempt. After matching all the cards you will be scored based on the amount of moves you made. Try to match all the cards in the least amount of moves.
 
-To get started, open `js/app.js` and start building out the app's functionality
+Good luck and have fun!
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Resources used
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+ * [Udacity start code, a static version of the Memory Game project](https://github.com/udacity/fend-project-memory-game)
+ * [animate.css](https://github.com/daneden/animate.css)
+ * [vex](http://github.hubspot.com/vex/)
+ * [jQuery](https://code.jquery.com/)
+ * [font awesome](https://fontawesome.com/)

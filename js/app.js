@@ -209,9 +209,9 @@ initGame();
 //  -add pop-up and reset game V
 //  -display score V
 // make responsive V
-// fix readme file
-// add leaderboard?
-// add event listener for key game restart
 // popup winner message and option to reset game V
-//review udacity guidelines
+// fix readme file V
+// add leaderboard? will be added in version 2
+// add event listener for key game restart? will be added in version 2
+//review udacity guidelines V
 //https://gomakethings.com/automatically-detecting-when-transitions-end-with-vanilla-javascript/
