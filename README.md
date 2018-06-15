@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
-* [How to play](#How to play)
-* [Resources used](#Resources used)
+* [How to play](#Howtoplay)
+* [Resources used](#Resourcesused)
 
 ## How to play
 
